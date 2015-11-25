@@ -1,0 +1,47 @@
+Animaatio (Hahmot)
+Ylimääräinen grafiikka (luonnon liikkeet, aktiiviset animaatiot)
+
+Videot
+Hahmojen grafiikka
+Particles -> lyöntiin mukaan (Blood splatter)
+Kasvojen animointi ja grafiikka
+
+
+Äänet:
+	- Juoksuun riippuen materiaalista
+	- Kävely/Juoksu eri äänet -> Tasapainoita ääni kulkemaan yhdessä askeleen kanssa
+	- Lyönti Osuiko/Menikö ohi
+
+
+Tarina:
+	- Kirjoita tarina peliin (Lore)
+	- Kirjoita kentät, mitä missäkin kentässä tehdään -> Montako?
+	- Miten ajatellaan että homman pitäisi toimia..
+
+
+Kenttien luonti:
+	- Luo täydellisiä kenttiä, huomioi colliderit niihin joihin se on järkevää
+
+
+
+Muu toiminta:
+	- Jos hahmo tippuu miten käy? -> Elämät pelissä
+	- Game over jos jotain?
+	- Try again?
+
+
+Hahmojen suunnittelu matematiikka
+	- Paljonko kestää mikäkin hahmo
+	- Paljonko vahinkoa tekee yksi lyönti -> Luodaanko useampi lyöntejä hahmolle? (Hitaampia? Helppo vääntää animaatioon)
+
+
+YLEISTÄ:
+	- Versiohallinta - Github? Selvitä - Asenna - Pistä toimimaan?
+	- Yleiset pelisäännöt kehittämisessä
+	- Pystärit
+	- Sprintti palaveriin valmistautuminen
+	- Demon esittämine 1-2 henkilöä esittää - Ei kaikki
+
+	- Web Playerin käyttö demoamisessa, voi näyttää skripteistä jotain tärkeitä osa-alueita
+	- RedMinen käyttö
+	-
