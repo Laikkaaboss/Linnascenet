@@ -74,6 +74,8 @@ public class PlayerHealth : MonoBehaviour
         // If the player has lost all it's health and the death flag hasn't been set yet...
         if (currentHealth <= 0 && !isDead)
         {
+            Debug.Log("Kuolee");
+            //onAnimationEnd();
             // ... it should die.
             Death();
         }
@@ -84,10 +86,7 @@ public class PlayerHealth : MonoBehaviour
     {
         // Set the death flag so this function won't be called again.
         isDead = true;
-
-        // Turn off any remaining shooting effects.
-       // playerShooting.DisableEffects();
-
+        
         // Tell the animator that the player is dead.
         anim.SetTrigger("Die");
 
@@ -97,7 +96,28 @@ public class PlayerHealth : MonoBehaviour
 
         // Turn off the movement and shooting scripts.
         playerMovement.enabled = false;
-      //  playerShooting.enabled = false;
+    
+        StartCoroutine("waitAnimation");
+       // onAnimationEnd();
+        //  playerShooting.enabled = false;
+    }
+    IEnumerator waitAnimation()
+    {
+
+        Debug.Log("Animation going");
+        yield return new WaitForSeconds(8);
+        Debug.Log("Animation shud be done!");
+        onAnimationEnd();
+
+        // after movie is not playing / has stopped.
+
+    }
+
+    void onAnimationEnd()
+    {
+        Debug.Log("Animation done!");
+        Application.LoadLevel(5);
+
     }
 }
 

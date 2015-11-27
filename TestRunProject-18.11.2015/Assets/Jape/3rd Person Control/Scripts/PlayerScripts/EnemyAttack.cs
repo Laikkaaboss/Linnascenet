@@ -68,7 +68,7 @@ void OnTriggerExit(Collider other)
         if (playerHealth.currentHealth <= 0)
         {
             // ... tell the animator the player is dead.
-            anim.SetTrigger("Die");
+         //   anim.SetTrigger("Die");
         }
     }
 
