@@ -54,8 +54,27 @@ public class PlayerHealth : MonoBehaviour
 
         // Reset the damaged flag.
         damaged = false;
-    }
 
+    }
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.relativeVelocity.magnitude > 5)
+        {
+            damaged = true;
+            currentHealth -= 25;
+        }
+        if (collision.relativeVelocity.magnitude > 7)
+        {
+            damaged = true;
+            currentHealth -= 50;
+        }
+        HealthSlider.value = currentHealth;
+        if (currentHealth <= 0 && !isDead)
+        {
+            // ... it should die.
+            Death();
+        }
+    }
 
     public void TakeDamage(int amount)
     {
