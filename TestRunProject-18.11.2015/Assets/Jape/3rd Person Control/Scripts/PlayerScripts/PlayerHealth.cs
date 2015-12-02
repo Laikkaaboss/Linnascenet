@@ -58,16 +58,22 @@ public class PlayerHealth : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.relativeVelocity.magnitude > 5)
+        if (collision.relativeVelocity.magnitude > 7)
         {
             damaged = true;
             currentHealth -= 25;
         }
-        if (collision.relativeVelocity.magnitude > 7)
+        if (collision.relativeVelocity.magnitude > 10)
         {
             damaged = true;
             currentHealth -= 50;
         }
+        if (collision.relativeVelocity.magnitude > 12)
+        {
+            damaged = true;
+            currentHealth -= 100;
+        }
+
         HealthSlider.value = currentHealth;
         if (currentHealth <= 0 && !isDead)
         {

@@ -1,10 +1,18 @@
 fileFormatVersion: 2
 guid: 45a6ca8b3a211434088bbebcf24fa87f
-timeCreated: 1449047868
+timeCreated: 1449056109
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - grassSound: {instanceID: 0}
+  - waterSound: {instanceID: 0}
+  - woodSound: {instanceID: 0}
+  - snowSound: {instanceID: 0}
+  - gravelSound: {fileID: 8300000, guid: 94dbd4febab734210a43c84263f5e116, type: 3}
+  - metalSound: {instanceID: 0}
+  - plasticSound: {instanceID: 0}
+  - jumpSound: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
