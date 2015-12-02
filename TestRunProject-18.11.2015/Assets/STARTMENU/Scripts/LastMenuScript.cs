@@ -5,20 +5,21 @@ public class LastMenuScript : MonoBehaviour {
 
     public Camera ChosenCamera1;
     public MovieTexture movie1;
+
     void Start()
     {
         ChosenCamera1 = ChosenCamera1.GetComponent<Camera>();
-        Debug.Log("rallatilei");
     }
     void Update()
     {
         if (ChosenCamera1.enabled)
         {
-            Debug.Log("soittaa rallatilei");
             GetComponent<Renderer>().material.mainTexture = movie1 as MovieTexture;
             GetComponent<AudioSource>().clip = movie1.audioClip;
+      
             movie1.loop = true;
             movie1.Play();
+            
             StartCoroutine("waitForMovieEnd");
         }
     }
