@@ -8,15 +8,15 @@ public class PlayerHealth : MonoBehaviour
     public int currentHealth;                                   // The current health the player has.
     public Slider HealthSlider;                                 // Reference to the UI's health bar.
     public Image DamageImage;                                   // Reference to an image to flash on the screen on being hurt.
-   // public AudioClip deathClip;                                 // The audio clip to play when the player dies.
+    public AudioClip deathClip;                                  // public AudioClip deathClip;                                 // The audio clip to play when the player dies.
     public float flashSpeed = 5f;                               // The speed the damageImage will fade at.
     public Color flashColour = new Color(1f, 0f, 0f, 0.1f);     // The colour the damageImage is set to, to flash.
 
 
     Animator anim;                                              // Reference to the Animator component.
-   // AudioSource playerAudio;                                    // Reference to the AudioSource component.
+    AudioSource playerAudio;                                                                    // AudioSource playerAudio;                                    // Reference to the AudioSource component.
     PlayerControl playerMovement;                              // Reference to the player's movement.
-    PlayerAttacking playerAttacking;                              // Reference to the PlayerShooting script.
+    //PlayerAttacking playerAttacking;                              // Reference to the PlayerShooting script.
     bool isDead;                                                // Whether the player is dead.
     bool damaged;                                               // True when the player gets damaged.
 
@@ -25,9 +25,9 @@ public class PlayerHealth : MonoBehaviour
     {
         // Setting up the references.
         anim = GetComponent<Animator>();
-        //playerAudio = GetComponent<AudioSource>();
+        playerAudio = GetComponent<AudioSource>();
         playerMovement = GetComponent<PlayerControl>();
-        playerAttacking = GetComponentInChildren<PlayerAttacking>();
+        //playerAttacking = GetComponentInChildren<PlayerAttacking>();
 
         // Set the initial health of the player.
         currentHealth = startingHealth;
@@ -54,33 +54,31 @@ public class PlayerHealth : MonoBehaviour
 
         // Reset the damaged flag.
         damaged = false;
-
     }
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.relativeVelocity.magnitude > 7)
+    
+        if (collision.collider.tag == "Untagged")
         {
-            damaged = true;
-            currentHealth -= 25;
+            if (collision.relativeVelocity.magnitude > 5)
+            {
+                damaged = true;
+                currentHealth -= 25;
+            }
+            if (collision.relativeVelocity.magnitude > 7)
+            {
+                damaged = true;
+                currentHealth -= 50;
+            }
         }
-        if (collision.relativeVelocity.magnitude > 10)
-        {
-            damaged = true;
-            currentHealth -= 50;
-        }
-        if (collision.relativeVelocity.magnitude > 12)
-        {
-            damaged = true;
-            currentHealth -= 100;
-        }
-
         HealthSlider.value = currentHealth;
         if (currentHealth <= 0 && !isDead)
         {
-            // ... it should die.
+            // ... it should die.  
             Death();
+            }  
         }
-    }
+
 
     public void TakeDamage(int amount)
     {
@@ -111,20 +109,23 @@ public class PlayerHealth : MonoBehaviour
     {
         // Set the death flag so this function won't be called again.
         isDead = true;
-        
+
+        // Turn off any remaining shooting effects.
+        // playerShooting.DisableEffects();
+      
+
         // Tell the animator that the player is dead.
         anim.SetTrigger("Die");
-
+        playerAudio.clip = deathClip;
+        playerAudio.Play();
         // Set the audiosource to play the death clip and play it (this will stop the hurt sound from playing).
         //playerAudio.clip = deathClip;
         //playerAudio.Play();
 
         // Turn off the movement and shooting scripts.
         playerMovement.enabled = false;
-    
-        StartCoroutine("waitAnimation");
-       // onAnimationEnd();
         //  playerShooting.enabled = false;
+        StartCoroutine("waitAnimation");
     }
     IEnumerator waitAnimation()
     {
@@ -145,6 +146,4 @@ public class PlayerHealth : MonoBehaviour
 
     }
 }
-
-
 

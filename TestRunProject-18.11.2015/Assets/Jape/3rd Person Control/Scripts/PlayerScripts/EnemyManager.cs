@@ -4,10 +4,9 @@ public class EnemyManager : MonoBehaviour
 {
     public PlayerHealth playerHealth;       // Reference to the player's heatlh.
     public GameObject enemy;                // The enemy prefab to be spawned.
-    public float spawnTime = 10f;            // How long between each spawn.
+    public float spawnTime = 3f;            // How long between each spawn.
     public Transform[] spawnPoints;         // An array of the spawn points this enemy can spawn from.
-
-    private int counter = 0;
+    private int a = 0;
 
     void Start()
     {
@@ -18,24 +17,21 @@ public class EnemyManager : MonoBehaviour
 
     void Spawn()
     {
-        // If the player has no health left...
-        if (playerHealth.currentHealth <= 0f)
+        if (a < 3)
         {
-            // ... exit the function.
-            return;
-        }
-    
+            // If the player has no health left...
+            if (playerHealth.currentHealth <= 0f)
+            {
+                // ... exit the function.
+                return;
+            }
 
-        if (counter == 5)
-        {
-            return;
+            // Find a random index between zero and one less than the number of spawn points.
+            int spawnPointIndex = Random.Range(0, spawnPoints.Length);
+            a++;
+            // Create an instance of the enemy prefab at the randomly selected spawn point's position and rotation.
+            GameObject newEnemy = (GameObject)Instantiate(enemy, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
+            newEnemy.name = "Enemy" + a;
         }
-        // Find a random index between zero and one less than the number of spawn points.
-        counter++;
-        int spawnPointIndex = Random.Range(0, spawnPoints.Length);
-
-        // Create an instance of the enemy prefab at the randomly selected spawn point's position and rotation.
-        Instantiate(enemy, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
-      
     }
 }

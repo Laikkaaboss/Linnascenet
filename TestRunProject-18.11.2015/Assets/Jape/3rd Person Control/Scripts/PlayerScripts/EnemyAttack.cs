@@ -10,50 +10,72 @@ public class EnemyAttack : MonoBehaviour
 
     Animator anim;                              // Reference to the animator component.
     GameObject player;                          // Reference to the player GameObject.
+    Transform playerPos;
+    Transform enemyPos;
+    public GameObject enemy;
     PlayerHealth playerHealth;   // Reference to the player's health.
-    EnemyHealth enemyHealth;                                            // EnemyHealth enemyHealth;                    // Reference to this enemy's health.
+    EnemyHealth enemyHealth;
+    NavMeshAgent nav;
+    EnemyMovement enemyMovement;                    // EnemyHealth enemyHealth;                    // Reference to this enemy's health.
     bool playerInRange;                         // Whether player is within the trigger collider and can be attacked.
     float timer;                                // Timer for counting up to the next attack.
 
+    private int Lyopelaaja;
 
     void Awake()
     {
         // Setting up the references.
+        Lyopelaaja = Animator.StringToHash("Lyopelaaja");
+        nav = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player");
         playerHealth = player.GetComponent<PlayerHealth>();
         enemyHealth = GetComponent<EnemyHealth>();
         anim = GetComponent<Animator>();
+        playerPos = GameObject.FindGameObjectWithTag("Player").transform;
+        enemyPos = enemy.transform;
     }
 
 
     void OnTriggerEnter(Collider other)
-{
-    // If the entering collider is the player...
-    
-    if (other.gameObject == player)
     {
-        // ... the player is in range.
-        
-        playerInRange = true;
+        // If the entering collider is the player...
+
+        if (other.gameObject == player)
+        {
+            //Lyö pelaajaa
+            //     anim.SetBool()
+            anim.SetBool(Lyopelaaja, true);
+            //    Lyopelaajaa = true;
+            //anim.SetTrigger("FIGHT Blend Tree");
+            // ... the player is in range.
+            nav.SetDestination(enemyPos.position);
+            playerInRange = true;
+        }
     }
-}
 
 
-void OnTriggerExit(Collider other)
-{
-    // If the exiting collider is the player...
-    
-    if (other.gameObject == player)
+    void OnTriggerExit(Collider other)
     {
-        
-        // ... the player is no longer in range.
-        playerInRange = false;
+        // If the exiting collider is the player...
+
+        if (other.gameObject == player)
+        {
+            anim.SetBool(Lyopelaaja, false);
+            // Lyopelaajaa = false;
+            //Jatkaa jahtaamista
+            // ... the player is no longer in range.
+            playerInRange = false;
+        }
     }
-}
 
 
     void Update()
     {
+        if (playerInRange == false)
+        {
+            nav.SetDestination(playerPos.position);
+        }
+
         // Add the time since Update was last called to the timer.
         timer += Time.deltaTime;
 
@@ -68,7 +90,7 @@ void OnTriggerExit(Collider other)
         if (playerHealth.currentHealth <= 0)
         {
             // ... tell the animator the player is dead.
-         //   anim.SetTrigger("Die");
+            anim.SetTrigger("Die");
         }
     }
 

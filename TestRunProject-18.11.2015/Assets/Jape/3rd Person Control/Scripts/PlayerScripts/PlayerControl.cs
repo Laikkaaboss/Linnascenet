@@ -265,10 +265,9 @@ public class PlayerControl : MonoBehaviour
     }
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Jauza!");
+
         if (other.gameObject.tag == "nextLvl")
         {
-            Debug.Log("Yay!");
             other.gameObject.SetActive(false);
             Application.LoadLevel(Application.loadedLevel + 1);
         }

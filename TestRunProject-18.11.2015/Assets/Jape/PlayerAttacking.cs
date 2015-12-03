@@ -1,45 +1,45 @@
-﻿using UnityEngine;
-using System.Collections;
-public class PlayerAttacking : MonoBehaviour
+﻿//using UnityEngine;
+//using System.Collections;
+//public class PlayerAttacking : MonoBehaviour
 
-{
-    public int attackDamage = 10;
-    public float range = 3f;
-    Ray attackRay;
-    RaycastHit attackHit;
-    EnemyHealth enemyHealth;
-    GameObject Enemy;
+//{
+//    public int attackDamage = 10;
+//    public float range = 3f;
+//    Ray attackRay;
+//    RaycastHit attackHit;
+//    EnemyHealth enemyHealth;
+//    GameObject Enemy;
 
-    void Awake()
-    {
+//    void Awake()
+//    {
         
-       // enemyHealth = Enemy.GetComponent<EnemyHealth>();
-      //  enemyHealth = GetComponent<EnemyHealth>();
-    }
+//       // enemyHealth = Enemy.GetComponent<EnemyHealth>();
+//      //  enemyHealth = GetComponent<EnemyHealth>();
+//    }
 
-    void Update()
-    {
-        if (Input.GetButtonDown("Lumbering"))
-        {
-            Attack();
-        }
-    }
+//    void Update()
+//    {
+//        if (Input.GetButtonDown("Lumbering"))
+//        {
+//            Attack();
+//        }
+//    }
 
    
 
-    void Attack()
-    {
+//    void Attack()
+//    {
 
 
-        if (Physics.Raycast(attackRay, out attackHit, range))
-        {
-            EnemyHealth enemyHealth = attackHit.collider.GetComponent<EnemyHealth>();
+//        if (Physics.Raycast(attackRay, out attackHit, range))
+//        {
+//            EnemyHealth enemyHealth = attackHit.collider.GetComponent<EnemyHealth>();
 
-            if (enemyHealth != null)
-                enemyHealth.TakeDamage(attackDamage, attackHit.point);
-        }
-    }
-}
+//            if (enemyHealth != null)
+//                enemyHealth.TakeDamage(attackDamage, attackHit.point);
+//        }
+//    }
+//}
 //{
 //    public GameObject enemy;
 //    public float attackTimer;
