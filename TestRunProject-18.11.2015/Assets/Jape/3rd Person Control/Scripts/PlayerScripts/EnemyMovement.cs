@@ -37,6 +37,7 @@ public class EnemyMovement : MonoBehaviour
         if (playerHealth.currentHealth > 0)
 
         {
+            Debug.Log("Perkele");
             if (enemyHealth.currentHealth <= 0)
             {
                 if (death == true)
