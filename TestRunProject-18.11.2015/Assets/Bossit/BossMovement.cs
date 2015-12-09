@@ -5,7 +5,7 @@ public class BossMovement : MonoBehaviour
 {
     Transform player;               // Reference to the player's position.
     PlayerHealth playerHealth;      // Reference to the player's health.
-    BossHealth enemyHealth;        // Reference to this enemy's health.
+    BossHealth bossHealth;        // Reference to this enemy's health.
     NavMeshAgent nav;               // Reference to the nav mesh agent.
                                     //EnemyMovement enemyMovement;
     Animator anim;
@@ -18,14 +18,14 @@ public class BossMovement : MonoBehaviour
     private int isKuollut;
     void Awake()
     {
-        isKuollut = Animator.StringToHash("Die");
+        isKuollut = Animator.StringToHash("creature1Die");
         playerAudio = GetComponent<AudioSource>();
         // Set up the references.
         anim = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         //enemyMovement = GetComponent<EnemyMovement>();
         playerHealth = player.GetComponent<PlayerHealth>();
-        enemyHealth = GetComponent<BossHealth>();
+        bossHealth = GetComponent<BossHealth>();
         nav = GetComponent<NavMeshAgent>();
     }
 
@@ -37,7 +37,8 @@ public class BossMovement : MonoBehaviour
         if (playerHealth.currentHealth > 0)
 
         {
-            if (enemyHealth.currentHealth <= 0)
+            
+            if (bossHealth.currentHealth <= 0)
             {
                 if (death == true)
                 {

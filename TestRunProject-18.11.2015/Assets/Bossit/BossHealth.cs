@@ -8,7 +8,7 @@ public class BossHealth : MonoBehaviour
     private int isKuollut;
     CapsuleCollider capsuleCollider;
     bool isDead;
-    EnemyMovement enemyMovement;
+    BossMovement bossMovement;
     Animator anim;
     public AudioClip damageClip;
     // Use this for initialization
@@ -17,7 +17,7 @@ public class BossHealth : MonoBehaviour
     {
         playerAudio = GetComponent<AudioSource>();
         anim = GetComponent<Animator>();
-        enemyMovement = GetComponent<EnemyMovement>();
+        bossMovement = GetComponent<BossMovement>();
         isKuollut = Animator.StringToHash("isKuollut");
     }
     void Start()
@@ -49,6 +49,7 @@ public class BossHealth : MonoBehaviour
     }
     public void receiveDamage(float damage)
     {
+        Debug.Log("Ottaa");
         playerAudio.clip = damageClip;
         playerAudio.Play();
         currentHealth = currentHealth - damage;
@@ -77,3 +78,4 @@ public class BossHealth : MonoBehaviour
 
 
 }
+

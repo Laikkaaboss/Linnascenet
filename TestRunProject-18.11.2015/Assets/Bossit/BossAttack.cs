@@ -14,9 +14,9 @@ public class BossAttack : MonoBehaviour
     Transform enemyPos;
     public GameObject enemy;
     PlayerHealth playerHealth;   // Reference to the player's health.
-    EnemyHealth enemyHealth;
+    BossHealth bossHealth;
     NavMeshAgent nav;
-    EnemyMovement enemyMovement;                    // EnemyHealth enemyHealth;                    // Reference to this enemy's health.
+    BossMovement bossMovement;                    // EnemyHealth enemyHealth;                    // Reference to this enemy's health.
     bool playerInRange;                         // Whether player is within the trigger collider and can be attacked.
     float timer;                                // Timer for counting up to the next attack.
 
@@ -25,11 +25,11 @@ public class BossAttack : MonoBehaviour
     void Awake()
     {
         // Setting up the references.
-        Lyopelaaja = Animator.StringToHash("Lyopelaaja");
+        Lyopelaaja = Animator.StringToHash("creature1Attack2");
         nav = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player");
         playerHealth = player.GetComponent<PlayerHealth>();
-        enemyHealth = GetComponent<EnemyHealth>();
+        bossHealth = GetComponent<BossHealth>();
         anim = GetComponent<Animator>();
         playerPos = GameObject.FindGameObjectWithTag("Player").transform;
         enemyPos = enemy.transform;
@@ -80,7 +80,7 @@ public class BossAttack : MonoBehaviour
         timer += Time.deltaTime;
 
         // If the timer exceeds the time between attacks, the player is in range and this enemy is alive...
-        if (timer >= timeBetweenAttacks && playerInRange && enemyHealth.currentHealth > 0)
+        if (timer >= timeBetweenAttacks && playerInRange && bossHealth.currentHealth > 0)
         {
             // ... attack.
             Attack();
