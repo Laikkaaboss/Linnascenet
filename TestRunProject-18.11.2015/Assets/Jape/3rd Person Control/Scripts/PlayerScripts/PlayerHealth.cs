@@ -64,15 +64,17 @@ public class PlayerHealth : MonoBehaviour
     
         if (collision.collider.tag == "Untagged")
         {
-            if (collision.relativeVelocity.magnitude > 5)
+            if (collision.relativeVelocity.magnitude > 7)
             {
                 damaged = true;
                 currentHealth -= 25;
             }
-            if (collision.relativeVelocity.magnitude > 7)
+            if (collision.relativeVelocity.magnitude > 40)
             {
                 damaged = true;
                 currentHealth -= 50;
+
+                
             }
         }
         HealthSlider.value = currentHealth;
@@ -146,7 +148,7 @@ public class PlayerHealth : MonoBehaviour
     void onAnimationEnd()
     {
         Debug.Log("Animation done!");
-        Application.LoadLevel(5);
+        Application.LoadLevel(6);
 
     }
 }
