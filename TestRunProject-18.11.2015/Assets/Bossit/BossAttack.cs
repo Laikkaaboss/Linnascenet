@@ -25,7 +25,7 @@ public class BossAttack : MonoBehaviour
     void Awake()
     {
         // Setting up the references.
-        Lyopelaaja = Animator.StringToHash("creature1Attack2");
+        Lyopelaaja = Animator.StringToHash("Lyopelaaja");
         nav = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player");
         playerHealth = player.GetComponent<PlayerHealth>();

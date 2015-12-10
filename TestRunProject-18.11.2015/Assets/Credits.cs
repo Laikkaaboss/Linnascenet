@@ -11,9 +11,10 @@ public class Credits : MonoBehaviour {
 	void Update () {
         camera.transform.Translate(Vector3.down * Time.deltaTime * speed);
         StartCoroutine(waitFor());
+
                 }
     IEnumerator waitFor(){
-        yield return new WaitForSeconds(50);
+        yield return new WaitForSeconds(60);
         Application.LoadLevel(0);
         
         }
