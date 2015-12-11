@@ -9,7 +9,7 @@ public class BossAttack : MonoBehaviour
 
 
     Animator anim;                              // Reference to the animator component.
-    GameObject player;                          // Reference to the player GameObject.
+    public GameObject player;                          // Reference to the player GameObject.
     Transform playerPos;
     Transform enemyPos;
     public GameObject enemy;
@@ -27,12 +27,13 @@ public class BossAttack : MonoBehaviour
         // Setting up the references.
         Lyopelaaja = Animator.StringToHash("Lyopelaaja");
         nav = GetComponent<NavMeshAgent>();
-        player = GameObject.FindGameObjectWithTag("Player");
+       // player = GameObject.FindGameObjectWithTag("Player");
         playerHealth = player.GetComponent<PlayerHealth>();
         bossHealth = GetComponent<BossHealth>();
         anim = GetComponent<Animator>();
-        playerPos = GameObject.FindGameObjectWithTag("Player").transform;
-        enemyPos = enemy.transform;
+        //  playerPos = GameObject.FindGameObjectWithTag("Player").transform;
+        playerPos = player.transform;
+          enemyPos = enemy.transform;
     }
 
 

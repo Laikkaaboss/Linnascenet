@@ -3,7 +3,8 @@ using System.Collections;
 
 public class BossMovement : MonoBehaviour
 {
-    Transform player;               // Reference to the player's position.
+    //Transform player;               // Reference to the player's position.
+    public GameObject player;
     PlayerHealth playerHealth;      // Reference to the player's health.
     BossHealth bossHealth;        // Reference to this enemy's health.
     NavMeshAgent nav;               // Reference to the nav mesh agent.
@@ -22,7 +23,7 @@ public class BossMovement : MonoBehaviour
         playerAudio = GetComponent<AudioSource>();
         // Set up the references.
         anim = GetComponent<Animator>();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        //player = GameObject.FindGameObjectWithTag("Player").transform;
         //enemyMovement = GetComponent<EnemyMovement>();
         playerHealth = player.GetComponent<PlayerHealth>();
         bossHealth = GetComponent<BossHealth>();

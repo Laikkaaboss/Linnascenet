@@ -3,7 +3,8 @@ using System.Collections;
 
 public class EnemyMovement : MonoBehaviour
 {
-    Transform player;               // Reference to the player's position.
+    // Transform player;               // Reference to the player's position.
+    public GameObject player;
     PlayerHealth playerHealth;      // Reference to the player's health.
     EnemyHealth enemyHealth;        // Reference to this enemy's health.
     NavMeshAgent nav;               // Reference to the nav mesh agent.
@@ -22,7 +23,7 @@ public class EnemyMovement : MonoBehaviour
         playerAudio = GetComponent<AudioSource>();
         // Set up the references.
         anim = GetComponent<Animator>();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+    //    player = GameObject.FindGameObjectWithTag("Player").transform;
         //enemyMovement = GetComponent<EnemyMovement>();
         playerHealth = player.GetComponent<PlayerHealth>();
         enemyHealth = GetComponent<EnemyHealth>();
@@ -33,11 +34,12 @@ public class EnemyMovement : MonoBehaviour
     void Update()
     {
         // If the enemy and the player have health left...
-
+      
         if (playerHealth.currentHealth > 0)
-
+           
         {
-            Debug.Log("Perkele");
+         //   nav.SetDestination(player.transform.position);
+         //   Debug.Log("Perkele");
             if (enemyHealth.currentHealth <= 0)
             {
                 if (death == true)
