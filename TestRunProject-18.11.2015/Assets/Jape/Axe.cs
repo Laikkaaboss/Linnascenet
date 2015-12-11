@@ -47,10 +47,10 @@ public class Axe : MonoBehaviour
     void OnTriggerEnter(Collider col)
     {
       
-      //  Debug.Log("Collisioni tähän tagiin : " + col.gameObject.name);
+        Debug.Log("Collisioni tähän tagiin : " + col.gameObject.name);
         if (attacking)
         {
-            if (col.gameObject.name == "Enemy" || col.gameObject.name == "Enemy1" || col.gameObject.name == "Enemy2" || col.gameObject.name == "Enemy3" || col.gameObject.name == "Enemy4" || col.gameObject.name == "Enemy5" || col.gameObject.name == "Enemy6")
+            if (col.gameObject.name == "Enemy" || col.gameObject.name == "Enemy1" || col.gameObject.name == "Enemy2" || col.gameObject.name == "Enemy3" || col.gameObject.name == "Enemy4" || col.gameObject.name == "Enemy5" || col.gameObject.name == "Enemy6" || col.gameObject.name == "overlord" || col.gameObject.name == "creature1")
         {
                 enemyInRange = true;
            // if (eHealth.currentHealth <= 0)

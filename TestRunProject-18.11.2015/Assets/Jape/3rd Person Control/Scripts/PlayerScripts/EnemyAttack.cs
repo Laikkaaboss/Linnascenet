@@ -73,7 +73,7 @@ public class EnemyAttack : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(playerInRange);
+       
         if (playerInRange == false)
         {
             nav.SetDestination(playerPos.position);

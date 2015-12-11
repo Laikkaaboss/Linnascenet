@@ -19,7 +19,7 @@ public class BossMovement : MonoBehaviour
     private int isKuollut;
     void Awake()
     {
-        isKuollut = Animator.StringToHash("creature1Die");
+        isKuollut = Animator.StringToHash("IsKuollut");
         playerAudio = GetComponent<AudioSource>();
         // Set up the references.
         anim = GetComponent<Animator>();

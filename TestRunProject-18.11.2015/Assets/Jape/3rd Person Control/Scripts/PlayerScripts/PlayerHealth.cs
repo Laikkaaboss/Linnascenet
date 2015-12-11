@@ -151,5 +151,16 @@ public class PlayerHealth : MonoBehaviour
         Application.LoadLevel(6);
 
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "HpDrop")
+        {
+            currentHealth += 20;
+            // Debug.Log("Yay!");
+            other.gameObject.SetActive(false);
+        }
+    }
+
 }
 

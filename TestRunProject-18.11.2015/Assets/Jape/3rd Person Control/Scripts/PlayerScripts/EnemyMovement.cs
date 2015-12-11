@@ -17,6 +17,9 @@ public class EnemyMovement : MonoBehaviour
     // Use this for initialization
     AudioSource playerAudio;
     private int isKuollut;
+    public GameObject HpDrop;
+    Transform enemyPos;
+
     void Awake()
     {
         isKuollut = Animator.StringToHash("Die");
@@ -28,6 +31,8 @@ public class EnemyMovement : MonoBehaviour
         playerHealth = player.GetComponent<PlayerHealth>();
         enemyHealth = GetComponent<EnemyHealth>();
         nav = GetComponent<NavMeshAgent>();
+        enemyPos = enemy.transform;
+
     }
 
 
@@ -54,7 +59,11 @@ public class EnemyMovement : MonoBehaviour
                     // SpawnRagdoll();
                     Destroy(enemy,10);
                     death = false;
-                    
+                    GameObject newHpDrop = (GameObject)Instantiate(HpDrop, enemyPos.position,Quaternion.identity);
+                    newHpDrop.name = "HpDrop";
+
+
+
                 }
                 //Sammuttaa kokonaan skriptin, pitäisi kaataa vain vihun liike
                 //                 enemyMovement.enabled = false;

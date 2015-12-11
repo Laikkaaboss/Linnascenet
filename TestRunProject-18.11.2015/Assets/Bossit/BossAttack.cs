@@ -40,13 +40,14 @@ public class BossAttack : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         // If the entering collider is the player...
-
+        Debug.Log("Tulostaa" + other.gameObject);
         if (other.gameObject == player)
         {
             //Lyö pelaajaa
             //     anim.SetBool()
             anim.SetBool(Lyopelaaja, true);
             //    Lyopelaajaa = true;
+           
             //anim.SetTrigger("FIGHT Blend Tree");
             // ... the player is in range.
             nav.SetDestination(enemyPos.position);
