@@ -21,14 +21,38 @@ public class TextTyper : MonoBehaviour
         textComp.text = "";
         StartCoroutine(TypeText());
     }
-
+		
     IEnumerator TypeText()
     {
-		Debug.Log (message);
+		//Debug.Log (message);
+		//word by word..
+		int words = 0;
+		int pointers = 0;
         foreach (char letter in message.ToCharArray())
         {
+
+			if (letter.ToString() == " "){
+				words++;
+			}
+			if (letter.ToString() == "."){
+				pointers++;
+			}
+			else{
+				pointers = 0;
+			}
+			if (pointers == 3){
+				textComp.text = "";
+				words = 0;
+			}
+			else{
 			Debug.Log (letter);
-            textComp.text += letter;
+			if (words == 8){
+				words = 0;
+				textComp.text += "\n";
+			}
+				textComp.text += letter;
+			}
+           
 	
           //  if (typeSound1 && typeSound2)
          //       SoundManager.instance.RandomizeSfx(typeSound1, typeSound2);
