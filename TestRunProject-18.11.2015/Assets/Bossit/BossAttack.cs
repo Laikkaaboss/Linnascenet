@@ -47,9 +47,10 @@ public class BossAttack : MonoBehaviour
             //     anim.SetBool()
             anim.SetBool(Lyopelaaja, true);
             //    Lyopelaajaa = true;
-           
+
             //anim.SetTrigger("FIGHT Blend Tree");
             // ... the player is in range.
+
             nav.SetDestination(enemyPos.position);
             playerInRange = true;
         }
@@ -75,6 +76,7 @@ public class BossAttack : MonoBehaviour
     {
         if (playerInRange == false)
         {
+
             nav.SetDestination(playerPos.position);
         }
 

@@ -39,9 +39,11 @@ public class ThirdPersonOrbitCam : MonoBehaviour
 
 	private float defaultFOV;
 	private float targetFOV;
+    
 
 	void Awake()
 	{
+
 		cam = transform;
 		playerControl = player.GetComponent<PlayerControl> ();
 
@@ -56,7 +58,9 @@ public class ThirdPersonOrbitCam : MonoBehaviour
 
 	void LateUpdate()
 	{
-		angleH += Mathf.Clamp(Input.GetAxis("Mouse X"), -1, 1) * horizontalAimingSpeed * Time.deltaTime;
+        Cursor.lockState = CursorLockMode.Locked;
+        UnityEngine.Cursor.visible = true;
+        angleH += Mathf.Clamp(Input.GetAxis("Mouse X"), -1, 1) * horizontalAimingSpeed * Time.deltaTime;
 		angleV += Mathf.Clamp(Input.GetAxis("Mouse Y"), -1, 1) * verticalAimingSpeed * Time.deltaTime;
 
 		// fly

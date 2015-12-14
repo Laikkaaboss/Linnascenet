@@ -12,13 +12,17 @@ public class BossMovement : MonoBehaviour
     Animator anim;
     public GameObject ragdoll;
     private bool death = true;
-    public GameObject enemy;
+    public GameObject Boss;
     public AudioClip dodClip;
     // Use this for initialization
     AudioSource playerAudio;
     private int isKuollut;
+    public GameObject nextLvl;
+    Transform BossPos;
     void Awake()
+
     {
+       
         isKuollut = Animator.StringToHash("IsKuollut");
         playerAudio = GetComponent<AudioSource>();
         // Set up the references.
@@ -28,6 +32,8 @@ public class BossMovement : MonoBehaviour
         playerHealth = player.GetComponent<PlayerHealth>();
         bossHealth = GetComponent<BossHealth>();
         nav = GetComponent<NavMeshAgent>();
+        BossPos = Boss.transform;
+
     }
 
 
@@ -51,8 +57,11 @@ public class BossMovement : MonoBehaviour
                     // enemy.transform.y 0 jotain jee 
                     anim.SetBool(isKuollut, true);
                     // SpawnRagdoll();
-                    Destroy(enemy, 10);
+                    Destroy(Boss, 10);
                     death = false;
+                    GameObject newnextLvl = (GameObject)Instantiate(nextLvl, BossPos.position, Quaternion.identity);
+                    newnextLvl.name = "nextLvl";
+                    Debug.Log("LVLDROP TULI");
 
                 }
                 //Sammuttaa kokonaan skriptin, pitäisi kaataa vain vihun liike
