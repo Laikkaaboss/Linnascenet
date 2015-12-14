@@ -9,7 +9,7 @@ public class TextTyper : MonoBehaviour
     public AudioClip typeSound1;
     public AudioClip typeSound2;
 	public Text teksti;
-   public string message;
+    public string message;
     Text textComp;
 
     // Use this for initialization
@@ -45,7 +45,7 @@ public class TextTyper : MonoBehaviour
 				words = 0;
 			}
 			else{
-			Debug.Log (letter);
+		//	Debug.Log (letter);
 			if (words == 8){
 				words = 0;
 				textComp.text += "\n";

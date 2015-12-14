@@ -19,7 +19,7 @@ public class EnemyMovement : MonoBehaviour
     private int isKuollut;
     public GameObject HpDrop;
     Transform enemyPos;
-
+	public int rangeToAggro;
     void Awake()
     {
         isKuollut = Animator.StringToHash("Die");
@@ -39,12 +39,15 @@ public class EnemyMovement : MonoBehaviour
     void Update()
     {
         // If the enemy and the player have health left...
-      
+	//	Debug.Log(Vector3.Distance (player.transform.position, enemy.transform.position));
+			
         if (playerHealth.currentHealth > 0)
            
         {
-         //   nav.SetDestination(player.transform.position);
+           // nav.SetDestination(player.transform.position);
          //   Debug.Log("Perkele");
+	//if (Vector3.Distance (player.transform.position, enemy.transform.position) < rangeToAggro) 
+
             if (enemyHealth.currentHealth <= 0)
             {
                 if (death == true)
@@ -74,13 +77,14 @@ public class EnemyMovement : MonoBehaviour
             {
                 //   nav.SetDestination(player.position);
             }
-        }
+        
         // Otherwise...
         else
         {
             // ... disable the nav mesh agent.
             nav.enabled = false;
         }
+		}
     }
     void SpawnRagdoll() 
     {

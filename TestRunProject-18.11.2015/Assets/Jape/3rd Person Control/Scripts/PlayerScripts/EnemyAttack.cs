@@ -21,6 +21,7 @@ public class EnemyAttack : MonoBehaviour
     float timer;                                // Timer for counting up to the next attack.
 
     private int Lyopelaaja;
+	public int rangeToAggro;
 
     void Awake()
     {
@@ -34,6 +35,7 @@ public class EnemyAttack : MonoBehaviour
         //  playerPos = GameObject.FindGameObjectWithTag("Player").transform;
         playerPos = player.transform;
         enemyPos = enemy.transform;
+
         
     }
 
@@ -73,28 +75,30 @@ public class EnemyAttack : MonoBehaviour
 
     void Update()
     {
-       
-        if (playerInRange == false)
-        {
-            nav.SetDestination(playerPos.position);
-        }
+		if (Vector3.Distance (player.transform.position, enemy.transform.position) < rangeToAggro) {
+			if (playerInRange == false) {
+				nav.SetDestination (player.transform.position);
+			}
+			// Add the time since Update was last called to the timer.
+			timer += Time.deltaTime;
 
-        // Add the time since Update was last called to the timer.
-        timer += Time.deltaTime;
+			// If the timer exceeds the time between attacks, the player is in range and this enemy is alive...
+			if (timer >= timeBetweenAttacks && playerInRange && enemyHealth.currentHealth > 0) {
+				// ... attack.
+				Attack ();
+			}
 
-        // If the timer exceeds the time between attacks, the player is in range and this enemy is alive...
-        if (timer >= timeBetweenAttacks && playerInRange && enemyHealth.currentHealth > 0)
-        {
-            // ... attack.
-            Attack();
-        }
-
-        // If the player has zero or less health...
-        if (playerHealth.currentHealth <= 0)
-        {
-            // ... tell the animator the player is dead.
-            anim.SetTrigger("Die");
-        }
+			// If the player has zero or less health...
+			if (playerHealth.currentHealth <= 0) {
+				// ... tell the animator the player is dead.
+				anim.SetTrigger ("Die");
+			}
+		}
+		else{
+//pitäisi vaan olla iddle...
+			nav.SetDestination(enemyPos.position);
+		}
+	
     }
 
 
