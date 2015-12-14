@@ -99,6 +99,7 @@ public class PlayerControl : MonoBehaviour
 		run = Input.GetButton ("Run");
 		sprint = Input.GetButton ("Sprint");
 		isMoving = Mathf.Abs(h) > 0.1 || Mathf.Abs(v) > 0.1;
+
 	}
 
 	void FixedUpdate()
@@ -122,6 +123,7 @@ public class PlayerControl : MonoBehaviour
 			MovementManagement (h, v, run, sprint);
 			JumpManagement ();
 		}
+
 	}
 
 	// fly

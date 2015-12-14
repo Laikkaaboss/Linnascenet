@@ -12,12 +12,13 @@ public class PlayerHealth : MonoBehaviour
     public AudioClip deathClip;                                 // The audio clip to play when the player dies.
     public float flashSpeed = 5f;                               // The speed the damageImage will fade at.
     public Color flashColour = new Color(1f, 0f, 0f, 0.1f);     // The colour the damageImage is set to, to flash.
+    //private int groundedBool;
 
 
     Animator anim;                                              // Reference to the Animator component.
     AudioSource playerAudio;                                    // Reference to the AudioSource component.
-    PlayerControl playerMovement;                              // Reference to the player's movement.
-    //PlayerAttacking playerAttacking;                              // Reference to the PlayerShooting script.
+    PlayerControl playerMovement;                               // Reference to the player's movement.
+    //PlayerAttacking playerAttacking;                          // Reference to the PlayerShooting script.
     bool isDead;                                                // Whether the player is dead.
     bool damaged;                                               // True when the player gets damaged.
    
@@ -29,6 +30,7 @@ public class PlayerHealth : MonoBehaviour
         anim = GetComponent<Animator>();
         playerAudio = GetComponent<AudioSource>();
         playerMovement = GetComponent<PlayerControl>();
+        //groundedBool = GetComponent<PlayerControl>();
         //playerAttacking = GetComponentInChildren<PlayerAttacking>();
 
         // Set the initial health of the player.
@@ -59,12 +61,12 @@ public class PlayerHealth : MonoBehaviour
         // Reset the damaged flag.
         damaged = false;
     }
-    void OnCollisionEnter(Collision collision)
-    {
-    
-        if (collision.collider.tag == "Untagged")
+     void OnCollisionEnter(Collision collision)
+     {
+
+        if (collision.collider.tag == "Lattia")
         {
-            if (collision.relativeVelocity.magnitude > 7)
+            if (collision.relativeVelocity.magnitude > 10)
             {
                 damaged = true;
                 currentHealth -= 25;
@@ -73,19 +75,32 @@ public class PlayerHealth : MonoBehaviour
             {
                 damaged = true;
                 currentHealth -= 50;
-
-                
             }
+
         }
-        HealthSlider.value = currentHealth;
-        if (currentHealth <= 0 && !isDead)
+        else {
+            Debug.Log("Joku muu");
+        }
+         HealthSlider.value = currentHealth;
+         if (currentHealth <= 0 && !isDead)
+         {
+             // ... it should die.  
+             Death();
+             }  
+         }
+         
+    /*function OnCollisionEnter(theCollision : Collision)
+    {
+        if (theCollision.gameObject.name == "Floor")
         {
-            // ... it should die.  
-            Death();
-            }  
+            Debug.Log("Hit the floor");
         }
-
-
+        else if (theCollision.gameObject.name == "Wall")
+        {
+            Debug.Log("Hit the wall");
+        }
+    }
+    */
     public void TakeDamage(int amount)
     {
         // Set the damaged flag so the screen will flash.
