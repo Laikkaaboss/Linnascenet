@@ -19,7 +19,7 @@ public class EnemyMovement : MonoBehaviour
     private int isKuollut;
     public GameObject HpDrop;
     Transform enemyPos;
-	public int rangeToAggro;
+
     void Awake()
     {
         isKuollut = Animator.StringToHash("Die");
@@ -63,6 +63,7 @@ public class EnemyMovement : MonoBehaviour
                     Destroy(enemy,10);
                     death = false;
                     GameObject newHpDrop = (GameObject)Instantiate(HpDrop, enemyPos.position,Quaternion.identity);
+                  //  newHpDrop.transform.Rotate(Vector3.right);
                     newHpDrop.name = "HpDrop";
 
 

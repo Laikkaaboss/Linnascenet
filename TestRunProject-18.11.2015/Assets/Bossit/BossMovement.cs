@@ -41,38 +41,33 @@ public class BossMovement : MonoBehaviour
     {
         // If the enemy and the player have health left...
 
-        if (playerHealth.currentHealth > 0)
+        if (playerHealth.currentHealth > 0){
 
-        {
-            
             if (bossHealth.currentHealth <= 0)
             {
                 if (death == true)
                 {
                     playerAudio.clip = dodClip;
                     playerAudio.Play();
-                    Debug.Log("KUOLI");
-                    //  isKuollut = true;
                     nav.Stop();
-                    // enemy.transform.y 0 jotain jee 
                     anim.SetBool(isKuollut, true);
-                    // SpawnRagdoll();
-                    Destroy(Boss, 10);
-                    death = false;
-                    GameObject newnextLvl = (GameObject)Instantiate(nextLvl, BossPos.position, Quaternion.identity);
-                    newnextLvl.name = "nextLvl";
-                    Debug.Log("LVLDROP TULI");
+                    // Destroy(Boss, 10);
+                    //     death = false;
 
+
+                    // GameObject newnextLvl = (GameObject)Instantiate(nextLvl, BossPos.position, Quaternion.identity);
+                    // newnextLvl.name = "nextLvl";
+                    // Debug.Log("LVLDROP TULI");
+
+                    //Soita tässä dialogi X
+                    waitti();
+                    StartCoroutine(waitti());
+                    
                 }
-                //Sammuttaa kokonaan skriptin, pitäisi kaataa vain vihun liike
-                //                 enemyMovement.enabled = false;
 
             }
             // ... set the destination of the nav mesh agent to the player.
-            if (death == true)
-            {
-                //   nav.SetDestination(player.position);
-            }
+
         }
         // Otherwise...
         else
@@ -81,11 +76,10 @@ public class BossMovement : MonoBehaviour
             nav.enabled = false;
         }
     }
-    void SpawnRagdoll()
+    IEnumerator waitti()
     {
-        //  Instantiate(ragdoll, enemy.transform.position, Quaternion.identity);
+        yield return new WaitForSeconds(10);
+        Application.LoadLevel(Application.loadedLevel + 1);
 
-        //  var clone = Instantiate(ragdoll, transform.position, transform.rotation);
-        //   Destroy(clone.gameObject, 5);
     }
 }

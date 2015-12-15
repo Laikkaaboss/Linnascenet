@@ -19,13 +19,14 @@ public class BossAttack : MonoBehaviour
     BossMovement bossMovement;                    // EnemyHealth enemyHealth;                    // Reference to this enemy's health.
     bool playerInRange;                         // Whether player is within the trigger collider and can be attacked.
     float timer;                                // Timer for counting up to the next attack.
-
+    public int rangeToAggro;
     private int Lyopelaaja;
-
+    private int isAggro;
     void Awake()
     {
         // Setting up the references.
         Lyopelaaja = Animator.StringToHash("Lyopelaaja");
+        isAggro = Animator.StringToHash("isAggro");
         nav = GetComponent<NavMeshAgent>();
        // player = GameObject.FindGameObjectWithTag("Player");
         playerHealth = player.GetComponent<PlayerHealth>();
@@ -74,27 +75,36 @@ public class BossAttack : MonoBehaviour
 
     void Update()
     {
-        if (playerInRange == false)
+        if (Vector3.Distance(player.transform.position, enemy.transform.position) < rangeToAggro)
         {
+            anim.SetBool(isAggro, true);
+            if (playerInRange == false)
+            {
 
-            nav.SetDestination(playerPos.position);
+                nav.SetDestination(playerPos.position);
+            }
+
+            // Add the time since Update was last called to the timer.
+            timer += Time.deltaTime;
+
+            // If the timer exceeds the time between attacks, the player is in range and this enemy is alive...
+            if (timer >= timeBetweenAttacks && playerInRange && bossHealth.currentHealth > 0)
+            {
+                // ... attack.
+                Attack();
+            }
+
+            // If the player has zero or less health...
+            if (playerHealth.currentHealth <= 0)
+            {
+                // ... tell the animator the player is dead.
+                anim.SetTrigger("Die");
+            }
         }
-
-        // Add the time since Update was last called to the timer.
-        timer += Time.deltaTime;
-
-        // If the timer exceeds the time between attacks, the player is in range and this enemy is alive...
-        if (timer >= timeBetweenAttacks && playerInRange && bossHealth.currentHealth > 0)
+        else
         {
-            // ... attack.
-            Attack();
-        }
-
-        // If the player has zero or less health...
-        if (playerHealth.currentHealth <= 0)
-        {
-            // ... tell the animator the player is dead.
-            anim.SetTrigger("Die");
+            nav.SetDestination(enemyPos.position);
+            anim.SetBool(isAggro, false);
         }
     }
 
