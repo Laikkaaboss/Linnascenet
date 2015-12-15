@@ -17,16 +17,18 @@ public class EnemyAttack : MonoBehaviour
     EnemyHealth enemyHealth;
     NavMeshAgent nav;
     EnemyMovement enemyMovement;                    // EnemyHealth enemyHealth;                    // Reference to this enemy's health.
-    bool playerInRange = false;                         // Whether player is within the trigger collider and can be attacked.
-    float timer;                                // Timer for counting up to the next attack.
+    bool playerInRange = false;                     // Whether player is within the trigger collider and can be attacked.
+    float timer;                                    // Timer for counting up to the next attack.
 
     private int Lyopelaaja;
+    private int isAggro;
 	public int rangeToAggro;
 
     void Awake()
     {
         // Setting up the references.
         Lyopelaaja = Animator.StringToHash("Lyopelaaja");
+        isAggro = Animator.StringToHash("isAggro");
         nav = GetComponent<NavMeshAgent>();
         //player = GameObject.FindGameObjectWithTag("Player");
         playerHealth = player.GetComponent<PlayerHealth>();
@@ -76,6 +78,7 @@ public class EnemyAttack : MonoBehaviour
     void Update()
     {
 		if (Vector3.Distance (player.transform.position, enemy.transform.position) < rangeToAggro) {
+            anim.SetBool(isAggro, true);
 			if (playerInRange == false) {
 				nav.SetDestination (player.transform.position);
 			}
@@ -95,8 +98,9 @@ public class EnemyAttack : MonoBehaviour
 			}
 		}
 		else{
-//pitäisi vaan olla iddle...
-			nav.SetDestination(enemyPos.position);
+            //pitäisi vaan olla iddle...
+            anim.SetBool(isAggro, false);
+            nav.SetDestination(enemyPos.position);
 		}
 	
     }

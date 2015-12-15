@@ -7,6 +7,7 @@ public class EnemyManager : MonoBehaviour
     public float spawnTime = 3f;            // How long between each spawn.
     public Transform[] spawnPoints;         // An array of the spawn points this enemy can spawn from.
     private int a = 0;
+    public int MontakoUkkoo;
 
     void Start()
     {
@@ -17,7 +18,7 @@ public class EnemyManager : MonoBehaviour
 
     void Spawn()
     {
-        if (a < 3)
+        if (a < MontakoUkkoo)
         {
             // If the player has no health left...
             if (playerHealth.currentHealth <= 0f)
@@ -28,6 +29,7 @@ public class EnemyManager : MonoBehaviour
 
             // Find a random index between zero and one less than the number of spawn points.
             int spawnPointIndex = Random.Range(0, spawnPoints.Length);
+
             a++;
             // Create an instance of the enemy prefab at the randomly selected spawn point's position and rotation.
             GameObject newEnemy = (GameObject)Instantiate(enemy, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);

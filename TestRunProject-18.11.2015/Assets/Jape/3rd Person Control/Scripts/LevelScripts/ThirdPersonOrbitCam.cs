@@ -39,12 +39,12 @@ public class ThirdPersonOrbitCam : MonoBehaviour
 
 	private float defaultFOV;
 	private float targetFOV;
-    
+    private bool mouseVisible;
 
 	void Awake()
 	{
-
-		cam = transform;
+        mouseVisible = false;
+        cam = transform;
 		playerControl = player.GetComponent<PlayerControl> ();
 
 		relCameraPos = transform.position - player.position;
@@ -58,13 +58,14 @@ public class ThirdPersonOrbitCam : MonoBehaviour
 
 	void LateUpdate()
 	{
+        if (mouseVisible == false) { 
         Cursor.lockState = CursorLockMode.Locked;
-        UnityEngine.Cursor.visible = true;
+        UnityEngine.Cursor.visible = false;
         angleH += Mathf.Clamp(Input.GetAxis("Mouse X"), -1, 1) * horizontalAimingSpeed * Time.deltaTime;
 		angleV += Mathf.Clamp(Input.GetAxis("Mouse Y"), -1, 1) * verticalAimingSpeed * Time.deltaTime;
-
-		// fly
-		if(playerControl.IsFlying())
+        }
+        // fly
+        if (playerControl.IsFlying())
 		{
 			angleV = Mathf.Clamp(angleV, minVerticalAngle, flyMaxVerticalAngle);
 		}
@@ -122,8 +123,18 @@ public class ThirdPersonOrbitCam : MonoBehaviour
 		smoothCamOffset = Vector3.Lerp(smoothCamOffset, targetCamOffset, smooth * Time.deltaTime);
 
 		cam.position =  player.position + camYRotation * smoothPivotOffset + aimRotation * smoothCamOffset;
-
-	}
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            mouseVisible = true;
+            UnityEngine.Cursor.visible = true;
+        }
+        if (mouseVisible == true) { 
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            mouseVisible = false;
+        }
+        }
+    }
 
 	// concave objects doesn't detect hit from outside, so cast in both directions
 	bool DoubleViewingPosCheck(Vector3 checkPos)

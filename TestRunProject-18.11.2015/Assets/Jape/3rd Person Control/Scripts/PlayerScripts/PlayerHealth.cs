@@ -79,7 +79,7 @@ public class PlayerHealth : MonoBehaviour
 
         }
         else {
-            Debug.Log("Joku muu");
+        
         }
          HealthSlider.value = currentHealth;
          if (currentHealth <= 0 && !isDead)
@@ -171,8 +171,15 @@ public class PlayerHealth : MonoBehaviour
     {
         if (other.gameObject.tag == "HpDrop")
         {
+            if (currentHealth < 101) { 
             currentHealth += 20;
+            }
+            if (currentHealth > 100)
+            {   
+                currentHealth = 100;
+            }
             // Debug.Log("Yay!");
+            HealthSlider.value = currentHealth;
             other.gameObject.SetActive(false);
         }
     }

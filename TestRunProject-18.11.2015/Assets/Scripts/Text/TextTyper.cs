@@ -9,15 +9,20 @@ public class TextTyper : MonoBehaviour
     public AudioClip typeSound1;
     public AudioClip typeSound2;
 	public Text teksti;
+    public Text QuestText;
+    public string questMessage;
     public string message;
     Text textComp;
+    Text textQuest;
 
     // Use this for initialization
     void Start()
 	{
+        textQuest = QuestText;
 		textComp = teksti;
         //textComp = GetComponent<Text>();
-		//message = textComp.text;
+        //message = textComp.text;
+        textQuest.text = "";
         textComp.text = "";
         StartCoroutine(TypeText());
     }
@@ -41,7 +46,8 @@ public class TextTyper : MonoBehaviour
 				pointers = 0;
 			}
 			if (pointers == 3){
-				textComp.text = "";
+                yield return new WaitForSeconds(5);
+                textComp.text = "";
 				words = 0;
 			}
 			else{
@@ -59,5 +65,11 @@ public class TextTyper : MonoBehaviour
             yield return 0;
             yield return new WaitForSeconds(letterPause);
         }
+        yield return new WaitForSeconds(3);
+       
+        yield return new WaitForSeconds(5);
+        textComp.text = "";
+        yield return new WaitForSeconds(1);
+        QuestText.text += "QUEST: " + questMessage;
     }
 }
