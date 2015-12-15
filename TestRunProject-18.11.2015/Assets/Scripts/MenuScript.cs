@@ -27,7 +27,10 @@ public class MenuScript : MonoBehaviour {
         startText.enabled = false;
         exitText.enabled = false;
     }
-
+    public void yesPress()
+    {
+        Application.Quit();
+    }
     public void noPress()
     {
         quitMenu.enabled = false;

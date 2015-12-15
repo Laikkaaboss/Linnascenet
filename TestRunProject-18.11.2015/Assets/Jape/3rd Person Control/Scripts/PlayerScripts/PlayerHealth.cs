@@ -163,7 +163,7 @@ public class PlayerHealth : MonoBehaviour
     void onAnimationEnd()
     {
         Debug.Log("Animation done!");
-        Application.LoadLevel(6);
+        Application.LoadLevel(9);
 
     }
 

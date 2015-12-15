@@ -18,6 +18,7 @@ public class TextTyper : MonoBehaviour
     // Use this for initialization
     void Start()
 	{
+      //  StartCoroutine(Waitti());
         textQuest = QuestText;
 		textComp = teksti;
         //textComp = GetComponent<Text>();
@@ -26,7 +27,10 @@ public class TextTyper : MonoBehaviour
         textComp.text = "";
         StartCoroutine(TypeText());
     }
-		
+    IEnumerator Waitti()
+    {
+        yield return new WaitForSeconds(2);
+    }
     IEnumerator TypeText()
     {
 		//Debug.Log (message);
@@ -72,4 +76,5 @@ public class TextTyper : MonoBehaviour
         yield return new WaitForSeconds(1);
         QuestText.text += "QUEST: " + questMessage;
     }
+
 }

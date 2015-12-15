@@ -15,7 +15,7 @@ public class Credits : MonoBehaviour {
                 }
     IEnumerator waitFor(){
         yield return new WaitForSeconds(60);
-        Application.LoadLevel(0);
+        Application.LoadLevel(10);
         
         }
 }

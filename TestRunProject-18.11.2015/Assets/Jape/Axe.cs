@@ -50,7 +50,7 @@ public class Axe : MonoBehaviour
         Debug.Log("Collisioni tähän tagiin : " + col.gameObject.name);
         if (attacking)
         {
-            if (col.gameObject.name == "Enemy" || col.gameObject.name == "Enemy1" || col.gameObject.name == "Enemy2" || col.gameObject.name == "Enemy3" || col.gameObject.name == "Enemy4" || col.gameObject.name == "Enemy5" || col.gameObject.name == "Enemy6" || col.gameObject.name == "overlord" || col.gameObject.name == "creature1")
+            if (col.gameObject.name == "Enemy" || col.gameObject.name == "Enemy1" || col.gameObject.name == "Enemy2" || col.gameObject.name == "Enemy3" || col.gameObject.name == "Enemy4" || col.gameObject.name == "Enemy5" || col.gameObject.name == "Enemy6" || col.gameObject.name == "overlord" || col.gameObject.name == "creature1" || col.gameObject.name == "Enemy7" || col.gameObject.name == "Enemy8" || col.gameObject.name == "Enemy9" || col.gameObject.name == "Enemy10" || col.gameObject.name == "Enemy11" || col.gameObject.name == "Enemy12" || col.gameObject.name == "Enemy13" || col.gameObject.name == "Enemy14" || col.gameObject.name == "Enemy15" || col.gameObject.name == "Enemy16" || col.gameObject.name == "Enemy17" || col.gameObject.name == "Enemy18")
         {
                 enemyInRange = true;
            // if (eHealth.currentHealth <= 0)
