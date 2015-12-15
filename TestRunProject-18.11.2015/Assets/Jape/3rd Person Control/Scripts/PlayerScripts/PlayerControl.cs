@@ -55,7 +55,6 @@ public class PlayerControl : MonoBehaviour
 	private bool fly = false;
 	private float distToGround;
 	private float sprintFactor;
-
 	void Awake()
 	{
         floorMask = LayerMask.GetMask("Floor");
