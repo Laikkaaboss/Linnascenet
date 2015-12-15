@@ -30,13 +30,15 @@ public class TextTyoerScene1 : MonoBehaviour {
     }
     void OnTriggerEnter(Collider other)
     {
-        if (used == false) { 
-        used = true;
-        textQuest.text = "";
-        textComp.text = "";
-        StartCoroutine(TypeText());
-        QuestText.text += "QUEST: " + questMessage;
-        }
+		if (other.gameObject.tag == "Player") {
+			if (used == false) { 
+				used = true;
+				textQuest.text = "";
+				textComp.text = "";
+				StartCoroutine (TypeText ());
+				QuestText.text += "QUEST: " + questMessage;
+			}
+		}
     }
     IEnumerator TypeText()
     {
