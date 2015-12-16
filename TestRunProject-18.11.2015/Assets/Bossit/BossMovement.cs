@@ -7,8 +7,8 @@ public class BossMovement : MonoBehaviour
     public GameObject player;
     PlayerHealth playerHealth;      // Reference to the player's health.
     BossHealth bossHealth;        // Reference to this enemy's health.
-    NavMeshAgent nav;               // Reference to the nav mesh agent.
-                                    //EnemyMovement enemyMovement;
+    NavMeshAgent nav;                // Reference to the nav mesh agent.
+                                   
     Animator anim;
     public GameObject ragdoll;
     private bool death = true;
@@ -18,6 +18,9 @@ public class BossMovement : MonoBehaviour
     AudioSource playerAudio;
     private int isKuollut;
     public GameObject nextLvl;
+    public GameObject TokaQuest;
+    private bool isDialogiPlayed = false;
+
     Transform BossPos;
     void Awake()
 
@@ -33,6 +36,7 @@ public class BossMovement : MonoBehaviour
         bossHealth = GetComponent<BossHealth>();
         nav = GetComponent<NavMeshAgent>();
         BossPos = Boss.transform;
+ 
 
     }
 
@@ -53,11 +57,12 @@ public class BossMovement : MonoBehaviour
                     anim.SetBool(isKuollut, true);
                     // Destroy(Boss, 10);
                     //     death = false;
-
+                    dialogi();
 
                     // GameObject newnextLvl = (GameObject)Instantiate(nextLvl, BossPos.position, Quaternion.identity);
                     // newnextLvl.name = "nextLvl";
                     // Debug.Log("LVLDROP TULI");
+
 
                     //Soita tässä dialogi X
                     waitti();
@@ -74,6 +79,7 @@ public class BossMovement : MonoBehaviour
         {
             // ... disable the nav mesh agent.
             nav.enabled = false;
+
         }
     }
     IEnumerator waitti()
@@ -82,4 +88,11 @@ public class BossMovement : MonoBehaviour
         Application.LoadLevel(Application.loadedLevel + 1);
 
     }
+    public void dialogi() {
+        if (isDialogiPlayed == false) {
+            GameObject newTokaQuest = (GameObject)Instantiate(TokaQuest, BossPos.position, Quaternion.identity);
+            isDialogiPlayed = true;
+        }
+    }
+
 }

@@ -9,13 +9,13 @@ public class Pause : MonoBehaviour {
 	bool Paused = false;
 	
 	void Start(){
-		bool Paused = true;
+		bool Paused = false;
 		Canvas.gameObject.SetActive (false);
 	}
 	
 	void Update () {
 		if (Input.GetKeyDown (KeyCode.Escape)) {
-			if (Paused){
+			if (!Paused){
 				Time.timeScale = 0;
 				Canvas.gameObject.SetActive (true);
 			}
@@ -27,7 +27,8 @@ public class Pause : MonoBehaviour {
 		}
 	}
 	public void Resume(){
-		Time.timeScale = 1.0f;
+       // Debug.Log("RESUME TRY");
+		Time.timeScale = 1;
 		Canvas.gameObject.SetActive (false);
 	//	Cursor.visible = false;
 	//	Screen.lockCursor = true;

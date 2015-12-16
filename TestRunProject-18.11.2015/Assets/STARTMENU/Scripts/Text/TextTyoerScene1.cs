@@ -36,8 +36,9 @@ public class TextTyoerScene1 : MonoBehaviour {
 				textQuest.text = "";
 				textComp.text = "";
 				StartCoroutine (TypeText ());
-				QuestText.text += "QUEST: " + questMessage;
-			}
+				QuestText.text += questMessage;
+               
+            }
 		}
     }
     IEnumerator TypeText()

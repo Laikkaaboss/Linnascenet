@@ -34,16 +34,16 @@ public class Axe : MonoBehaviour
                 // ... attack.
                 attacking = true;
                 }
-                // Attack();
-            
+            // Attack();
+          
+
         }
         if (Input.GetKeyUp("mouse 0"))
         {
             attacking = false;
         }
     }
-
-
+    
     void OnTriggerEnter(Collider col)
     {
       

@@ -5,8 +5,8 @@ public class ThirdPersonOrbitCam : MonoBehaviour
 {
 	public Transform player;
 	public Texture2D crosshair;
-	
-	public Vector3 pivotOffset = new Vector3(0.0f, 1.0f,  0.0f);
+    public GameObject CanvasOptions;
+    public Vector3 pivotOffset = new Vector3(0.0f, 1.0f,  0.0f);
 	public Vector3 camOffset   = new Vector3(0.0f, 0.7f, -3.0f);
 
 	public float smooth = 10f;
@@ -40,9 +40,10 @@ public class ThirdPersonOrbitCam : MonoBehaviour
 	private float defaultFOV;
 	private float targetFOV;
     private bool mouseVisible;
-
-	void Awake()
+    private bool Paused = false;
+    void Awake()
 	{
+        Paused = false;
         mouseVisible = false;
         cam = transform;
 		playerControl = player.GetComponent<PlayerControl> ();
@@ -52,13 +53,14 @@ public class ThirdPersonOrbitCam : MonoBehaviour
 
 		smoothPivotOffset = pivotOffset;
 		smoothCamOffset = camOffset;
-
-		defaultFOV = cam.GetComponent<Camera>().fieldOfView;
+        CanvasOptions.gameObject.SetActive(false);
+        defaultFOV = cam.GetComponent<Camera>().fieldOfView;
 	}
 
 	void LateUpdate()
 	{
         if (mouseVisible == false) { 
+            
         Cursor.lockState = CursorLockMode.Locked;
         UnityEngine.Cursor.visible = false;
         angleH += Mathf.Clamp(Input.GetAxis("Mouse X"), -1, 1) * horizontalAimingSpeed * Time.deltaTime;
@@ -125,8 +127,29 @@ public class ThirdPersonOrbitCam : MonoBehaviour
 		cam.position =  player.position + camYRotation * smoothPivotOffset + aimRotation * smoothCamOffset;
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            mouseVisible = true;
+            if (!Paused)
+            {
+                Time.timeScale = 0;
+                CanvasOptions.gameObject.SetActive(true);
+            }
+            else
+            {
+                Time.timeScale = 1;
+                CanvasOptions.gameObject.SetActive(false);
+            }
+            Paused = !Paused;
+            if (mouseVisible == false) {
+                mouseVisible = true;
             UnityEngine.Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            }
+            else
+            {
+                mouseVisible = false;
+                UnityEngine.Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+            }
+
         }
         if (mouseVisible == true) { 
         if (Input.GetKeyDown(KeyCode.Mouse0))

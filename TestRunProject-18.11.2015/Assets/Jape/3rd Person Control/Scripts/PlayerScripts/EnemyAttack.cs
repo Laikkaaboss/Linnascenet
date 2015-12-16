@@ -23,7 +23,10 @@ public class EnemyAttack : MonoBehaviour
     private int Lyopelaaja;
     private int isAggro;
 	public int rangeToAggro;
-
+    private bool agroedOnce;
+    public AudioClip aggroClip;
+    // Use this for initialization
+    AudioSource playerAudio;
     void Awake()
     {
         // Setting up the references.
@@ -37,6 +40,8 @@ public class EnemyAttack : MonoBehaviour
         //  playerPos = GameObject.FindGameObjectWithTag("Player").transform;
         playerPos = player.transform;
         enemyPos = enemy.transform;
+        agroedOnce = false;
+        playerAudio = GetComponent<AudioSource>();
 
         
     }
@@ -78,8 +83,15 @@ public class EnemyAttack : MonoBehaviour
     void Update()
     {
 		if (Vector3.Distance (player.transform.position, enemy.transform.position) < rangeToAggro) {
+
             anim.SetBool(isAggro, true);
-			if (playerInRange == false) {
+            if (agroedOnce == false)
+            {
+                playerAudio.clip = aggroClip;
+                playerAudio.Play();
+                agroedOnce = true;
+            }
+            if (playerInRange == false) {
 				nav.SetDestination (player.transform.position);
 			}
 			// Add the time since Update was last called to the timer.
