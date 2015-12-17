@@ -51,8 +51,8 @@ public class BossMovement : MonoBehaviour
             {
                 if (death == true)
                 {
-                    playerAudio.clip = dodClip;
-                    playerAudio.Play();
+                  //  playerAudio.clip = dodClip;
+                  //  playerAudio.Play();
                     nav.Stop();
                     anim.SetBool(isKuollut, true);
                     // Destroy(Boss, 10);
